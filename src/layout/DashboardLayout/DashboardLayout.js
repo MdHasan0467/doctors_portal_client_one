@@ -29,14 +29,16 @@ const DashboardLayout = () => {
 							<li>
 								<Link to='/dashboard'>My Appointment</Link>
 							</li>
-						{
-							isAdmin && 
+							{isAdmin && (
 								<>
 									<li>
 										<Link to='/dashboard/allUsers'>All Users</Link>
 									</li>
+									<li>
+										<Link to='/dashboard/addDoctors'>Add Doctor</Link>
+									</li>
 								</>
-							}
+							)}
 						</ul>
 					</div>
 				</div>

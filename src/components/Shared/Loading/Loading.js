@@ -3,7 +3,7 @@ import React from 'react';
 
 const Loading = () => {
     return (
-			<div className='flex justify-center mt-5'>
+			<div>
 				<Spinner aria-label='Default status example' />
 			</div>
 		);

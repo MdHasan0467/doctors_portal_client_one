@@ -23,7 +23,8 @@ const Login = () => {
 	
 	if (toaster)
 	{
-		toast.error("you are not an admin!");
+		toast.error(`Ohh, sorry!
+		You are not an admin!`);
 		}
 
 	if (token) {
@@ -92,9 +93,13 @@ const Login = () => {
 							<p className='text-red-600'>{errors.password?.message}</p>
 						)}
 					</div>
-					
-					<input className='btn btn-accent w-full' value='Login' type='submit'/>
-				
+
+					<input
+						className='btn bg-green-500 hover:bg-green-600 border-0 text-white w-full'
+						value='Login'
+						type='submit'
+					/>
+
 					<div>
 						{loginError && <p className='text-red-600'>{loginError}</p>}
 					</div>
