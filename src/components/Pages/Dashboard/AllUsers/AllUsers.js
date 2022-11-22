@@ -33,19 +33,36 @@ const AllUsers = () => {
 						    toast.success('Admin added successfully')
 						}
 					});
+	}
+	
+	const handleMakeUser = id => {
+        fetch(`http://localhost:5000/users/${id}`, {
+					method: 'PUT',
+					headers: {
+						authorization: `${localStorage.getItem('userAccessToken')}`,
+					},
+				})
+					.then((res) => res.json())
+					.then((data) => {
+						console.log('modiUser',data);
+						if (data.modifiedCount > 0) {
+							refetch();
+							toast.success('User added successfully');
+						}
+					});
     }
 
 
-	const handleDelete = id => {
-		// alert(id);
-		fetch(`http://localhost:5000/users/${id}`, {
-			method: 'DELETE'
-		})
-			.then(res => res.json())
-			.then(data => {
-			 refetch();
-		})
-	}
+	// const handleDelete = id => {
+	// 	// alert(id);
+	// 	fetch(`http://localhost:5000/users/${id}`, {
+	// 		method: 'DELETE'
+	// 	})
+	// 		.then(res => res.json())
+	// 		.then(data => {
+	// 		 refetch();
+	// 	})
+	// }
 
     return (
 			<div>
@@ -75,16 +92,37 @@ const AllUsers = () => {
 								</Table.Cell>
 								<Table.Cell>{user?.email}</Table.Cell>
 								<Table.Cell>
-									{user?.role ? (
-										<h1>Admin</h1>
-									) : (
-										<button
-											onClick={() => handleMakeAdmin(user?._id)}
-											className='btn-btn-xs bg-cyan-500 hover:bg-cyan-600 text-white p-2 rounded-lg'
-										>
-											Make Admin
-										</button>
-									)}
+									<>
+										{user?.role === 'admin' && (
+											<button
+												onClick={() => handleMakeAdmin(user?._id)}
+												className='btn-btn-xs bg-cyan-500 hover:bg-cyan-600 text-white p-2 rounded-lg'
+											>
+												Admin
+											</button>
+										)}
+									</>
+
+									<>
+										{user?.role === 'user' && (
+											<button
+												onClick={() => handleMakeAdmin(user?._id)}
+												className='btn-btn-xs bg-cyan-500 hover:bg-cyan-600 text-white p-2 rounded-lg'
+											>
+												Make Admin
+											</button>
+										)}
+									</>
+									<>
+										{(user.role !== 'admin' &&
+													<button
+														onClick={() => handleMakeAdmin(user?._id)}
+														className='btn-btn-xs bg-cyan-500 hover:bg-cyan-600 text-white p-2 rounded-lg'
+													>
+														Make Admin
+													</button>
+												)}
+									</>
 								</Table.Cell>
 								<Table.Cell>
 									<button className='btn-btn-xs  text-white bg-gray-500 hover:bg-gray-600 p-2 rounded-lg'>
@@ -93,7 +131,7 @@ const AllUsers = () => {
 								</Table.Cell>
 								<Table.Cell>
 									<a
-										onClick={() => handleDelete(user?._id)}
+										onClick={() => handleMakeUser(user?._id)}
 										className='font-medium cursor-pointer text-red-600 hover:underline dark:text-blue-500'
 									>
 										Delete

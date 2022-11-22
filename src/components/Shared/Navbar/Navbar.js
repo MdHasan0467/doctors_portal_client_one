@@ -74,10 +74,14 @@ const Navbar = () => {
 				</div>
 				<Link to='/' className='btn btn-ghost normal-case text-xl'>
 					Doctors Portal
-				</Link> User Name : 
-				 {
-					user?.displayName && <><h1>{user.displayName}</h1></>
-				}
+				</Link>
+				{user?.displayName && (
+					<>
+						<h1>
+							User : <span className='underline bg-green-100 p-2'> {user.displayName}</span>
+						</h1>
+					</>
+				)}
 			</div>
 			<div className='navbar-center hidden lg:flex'>
 				<ul className='menu menu-horizontal p-0'>{menuItems}</ul>
